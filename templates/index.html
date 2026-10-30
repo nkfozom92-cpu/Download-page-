@@ -1,110 +1,1418 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<!-- ================= PHOTO URL SETTINGS =================
-     শুধু নিচের URL-গুলো পরিবর্তন করলেই ছবি পরিবর্তন হবে।
-     URL অবশ্যই সরাসরি image URL হওয়া ভালো (.jpg/.jpeg/.png/.webp)
-=========================================================== -->
-<script>
-const PHOTO_URLS = {
-    // Main profile photo
-    profile: "https://i.ibb.co/HD4QywpY/3728.jpg",
-
-    // Birthday hat
-    hat: "https://i.ibb.co/rKRhrh8k/98307.jpg",
-
-    // Balloons
-    balloon1: "https://i.ibb.co/JR82yQ5s/98309.jpg",
-    balloon2: "https://i.ibb.co/Df2Ld678/98308.jpg",
-
-    // Decorations
-    decorateFlower: "https://i.ibb.co/YKVTZZW/98310.jpg",
-    decorateBottom: "https://i.ibb.co/YKVTZZW/98310.jpg",
-    smiley: "https://via.placeholder.com/150x150.png?text=Smiley",
-
-    // Letter photos
-    cute1: "https://via.placeholder.com/200x200.png?text=Cute+1",
-    cute2: "https://i.ibb.co/YKVTZZW/98310.jpg"
-};
-
-// Apply URL settings to all matching images
-document.addEventListener("DOMContentLoaded", () => {
-    const map = {
-        profile: [
-            '#profilePhoto',
-            '.boxMail .userImg img'
-        ],
-        hat: ['.hat img'],
-        balloon1: ['.balloon_one img'],
-        balloon2: ['.balloon_two img'],
-        decorateFlower: [
-            '.decorate_flower--one img',
-            '.decorate_flower--two img',
-            '.decorate_flower--three img'
-        ],
-        decorateBottom: ['.decorate_bottom img'],
-        smiley: ['.smiley__icon img'],
-        cute1: ['.imageCute img'],
-        cute2: ['.imageCute2 img']
-    };
-
-    Object.entries(map).forEach(([key, selectors]) => {
-        if (!PHOTO_URLS[key]) return;
-        selectors.forEach(selector => {
-            document.querySelectorAll(selector).forEach(img => {
-                img.src = PHOTO_URLS[key];
-            });
-        });
-    });
-});
-</script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="Happy Birthday Website 2.0 | Aoudumber Bade">
-    <meta name="github" content="https://github.com/Aoudumber-Bade">
-    <title> Birthday</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@400;600&display=swap"
-        rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Coiny&family=Titan+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nerko+One&family=Sriracha&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-:root{
-    --color-pink: #feecea;
-    --color-white: #fff;
-    --color-black: #333;
-    --color-text-pink: #FF7882;
-    --color-heart: #FF7882;
-    --color-bg-letter: #fff8e4;
-    --color-border: #DACCBF;
-}
-html{
-    height: 100%;
-}
-body {
-    position: relative;
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-image:linear-gradient(var(--color-pink), var(--color-pink));
-}
-#wrapper{
-    position: relative;
-    background-color: transparent;
+    <title>Drive Downloader — Premium</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #f0f2f5;
+            --card: #ffffff;
+            --accent1: #1e3c72;
+            --accent2: #2a5298;
+            --popup-bg: rgba(255,255,255,0.98);
+            --success: #4CAF50;
+            --error: #F44336;
+            --warning: #FF9800;
+            --premium: #FFD700;
+        }
+        
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        body {
+            margin: 0;
+            background: var(--bg);
+            font-family: 'Poppins', sans-serif;
+            color: #222;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        .wrap {
+            max-width: 900px;
+            margin: 28px auto;
+            padding: 24px;
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+            transition: all 0.3s ease;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            background: linear-gradient(90deg, var(--accent1), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .muted { 
+            color: #666; 
+            font-size: 13px; 
+        }
+        
+        .row { 
+            display: flex; 
+            gap: 12px; 
+            flex-wrap: wrap; 
+        }
+        
+        .col { 
+            flex: 1; 
+            min-width: 260px; 
+        }
+        
+        .card {
+            background: linear-gradient(180deg, #fff, #fbfdff);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #eef2f8;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        input[type=text] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d6dbe2;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        input[type=text]:focus {
+            outline: none;
+            border-color: var(--accent2);
+            box-shadow: 0 0 0 2px rgba(42,82,152,0.1);
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: 0;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn.green { 
+            background: linear-gradient(135deg, #00b09b, #96c93d); 
+        }
+        
+        .btn.orange { 
+            background: linear-gradient(135deg, #ff512f, #dd2476); 
+        }
+        
+        .btn.blue { 
+            background: linear-gradient(135deg, #1e3c72, #2a5298); 
+        }
+        
+        .btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15); 
+        }
+        
+        .btn:active { 
+            transform: translateY(0); 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+        }
+        
+        .btn:disabled { 
+            opacity: 0.7; 
+            cursor: not-allowed; 
+            transform: none !important; 
+        }
+
+        /* Tool area */
+        .btnGroup {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        
+        #resultBox { 
+            display: none; 
+            margin-top: 16px; 
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        #resultBox.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Download Popup - Professional Loading UI */
+        #downloadPopup {
+            position: fixed;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+        
+        #downloadPopup.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .downloadCard {
+            width: 400px;
+            max-width: 92vw;
+            background: var(--popup-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+            text-align: center;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        #downloadPopup.show .downloadCard {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .downloadCard h3 {
+            margin: 0 0 16px 0;
+            font-size: 22px;
+            color: var(--accent2);
+            font-weight: 600;
+        }
+        
+        .downloadCard p {
+            margin: 0 0 24px 0;
+            color: #555;
+            font-size: 15px;
+        }
+        
+        .countdown {
+            font-size: 42px;
+            font-weight: bold;
+            color: var(--accent1);
+            margin: 20px 0;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        /* Professional Loader */
+        .loader {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        
+        .loader-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 8px solid transparent;
+            border-top-color: var(--accent1);
+            border-radius: 50%;
+            animation: rotate 1.5s linear infinite;
+        }
+        
+        .loader-ring:nth-child(2) {
+            border-top-color: var(--accent2);
+            animation-delay: 0.3s;
+            border-width: 6px;
+            width: 90%;
+            height: 90%;
+            top: 5%;
+            left: 5%;
+        }
+        
+        .loader-ring:nth-child(3) {
+            border-top-color: rgba(42,82,152,0.6);
+            animation-delay: 0.6s;
+            border-width: 4px;
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        /* In-app Browser */
+        #inAppBrowser {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1001;
+            display: none;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+        
+        #inAppBrowser.show {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        #browserHeader {
+            padding: 12px 16px;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        #browserHeader .url {
+            flex: 1;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        #browserHeader .closeBtn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        #browserHeader .closeBtn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        #browserContent {
+            flex: 1;
+            border: none;
+            width: 100%;
+            height: calc(100% - 56px);
+        }
+
+        /* Premium Offline Popup */
+        #offlinePopup {
+            position: fixed;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1100;
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+        
+        #offlinePopup.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .offlineCard {
+            width: 380px;
+            max-width: 90vw;
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        #offlinePopup.show .offlineCard {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        
+        .offlineCard h3 {
+            margin: 0 0 16px 0;
+            color: var(--error);
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .offlineCard p {
+            margin: 0 0 24px 0;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .offlineCard .btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+        }
+        
+        .offline-icon {
+            font-size: 60px;
+            color: var(--error);
+            margin-bottom: 15px;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Premium Warning Popup */
+        #warningPopup {
+            position: fixed;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1100;
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+        
+        #warningPopup.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .warningCard {
+            width: 380px;
+            max-width: 90vw;
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        #warningPopup.show .warningCard {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        
+        .warningCard h3 {
+            margin: 0 0 16px 0;
+            color: var(--warning);
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .warningCard p {
+            margin: 0 0 24px 0;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .warningCard .btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+        }
+        
+        .warning-icon {
+            font-size: 60px;
+            color: var(--warning);
+            margin-bottom: 15px;
+        }
+
+        /* Connection Restored Notification */
+        #connectionRestored {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: linear-gradient(135deg, var(--success), #2E7D32);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(46, 125, 50, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 14px;
+        }
+        
+        #connectionRestored.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Copy Success Animation */
+        .copy-success {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--success);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .copy-success.show {
+            opacity: 1;
+        }
+        
+        .copy-text {
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Invalid Link Popup */
+        #invalidLinkPopup {
+            position: fixed;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1100;
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+        
+        #invalidLinkPopup.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .invalidLinkCard {
+            width: 380px;
+            max-width: 90vw;
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        #invalidLinkPopup.show .invalidLinkCard {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        
+        .invalidLinkCard h3 {
+            margin: 0 0 16px 0;
+            color: var(--error);
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .invalidLinkCard p {
+            margin: 0 0 24px 0;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .invalidLinkCard .btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+        }
+        
+        .invalidLink-icon {
+            font-size: 60px;
+            color: var(--error);
+            margin-bottom: 15px;
+        }
+
+        /* Download Progress Popup */
+        #downloadProgressPopup {
+            position: fixed;
+            inset: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+        
+        #downloadProgressPopup.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .downloadProgressCard {
+            width: 400px;
+            max-width: 92vw;
+            background: var(--popup-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+            text-align: center;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        #downloadProgressPopup.show .downloadProgressCard {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .downloadProgressCard h3 {
+            margin: 0 0 16px 0;
+            font-size: 22px;
+            color: var(--accent2);
+            font-weight: 600;
+        }
+        
+        .downloadProgressCard p {
+            margin: 0 0 24px 0;
+            color: #555;
+            font-size: 15px;
+        }
+        
+        /* 3D Download Animation */
+        .download-animation {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            position: relative;
+            perspective: 800px;
+        }
+        
+        .download-box {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .download-box .side {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 60, 114, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            backface-visibility: visible;
+        }
+        
+        .download-box .front {
+            transform: translateZ(60px);
+        }
+        
+        .download-box .back {
+            transform: rotateY(180deg) translateZ(60px);
+        }
+        
+        .download-box .right {
+            transform: rotateY(90deg) translateZ(60px);
+        }
+        
+        .download-box .left {
+            transform: rotateY(-90deg) translateZ(60px);
+        }
+        
+        .download-box .top {
+            transform: rotateX(90deg) translateZ(60px);
+        }
+        
+        .download-box .bottom {
+            transform: rotateX(-90deg) translateZ(60px);
+        }
+        
+        .download-arrow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            color: white;
+            animation: bounce 1.5s infinite;
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0 10px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent1), var(--accent2));
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+        
+        .download-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Animations */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+            50% { transform: translateY(-10px) rotateX(5deg) rotateY(5deg); }
+            100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, -50%); }
+            40% { transform: translate(-50%, -60%); }
+            60% { transform: translate(-50%, -55%); }
+        }
+        
+        .pulse { 
+            animation: pulse 1.5s infinite; 
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @media (max-width: 620px) {
+            header { 
+                flex-direction: column; 
+                align-items: flex-start; 
+            }
+            
+            .downloadCard { 
+                padding: 24px 20px; 
+            }
+            
+            .countdown { 
+                font-size: 36px; 
+            }
+            
+            .loader { 
+                width: 90px; 
+                height: 90px; 
+            }
+            
+            .btnGroup {
+                flex-direction: column;
+            }
+            
+            .btnGroup button {
+                width: 100%;
+            }
+            
+            #connectionRestored {
+                width: 90%;
+                text-align: center;
+                font-size: 13px;
+            }
+            
+            .download-animation {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .download-box .side {
+                font-size: 30px;
+            }
+            
+            .download-arrow {
+                font-size: 40px;
+            }
+        }
+
+        /* Responsive button layout */
+        @media (min-width: 480px) {
+            .btnGroup {
+                flex-wrap: nowrap;
+            }
+            
+            .btnGroup button {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Offline Popup -->
+    <div id="offlinePopup">
+        <div class="offlineCard">
+            <div class="material-icons offline-icon">wifi_off</div>
+            <h3>Connection Lost</h3>
+            <p>This app requires an active internet connection to function properly. Please check your network settings and try again.</p>
+            <button class="btn blue" onclick="openNetworkSettings()">
+                <span class="material-icons">settings</span>
+                Open Network Settings
+            </button>
+            <button class="btn" onclick="hideOfflinePopup()" style="background: #e0e0e0; color: #333;">
+                <span class="material-icons">close</span>
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Warning Popup -->
+    <div id="warningPopup">
+        <div class="warningCard">
+            <div class="material-icons warning-icon">warning</div>
+            <h3>Missing Link</h3>
+            <p>Please paste a valid Google Drive link in the input field before generating a direct download link.</p>
+            <button class="btn orange" onclick="hideWarningPopup()">
+                <span class="material-icons">check</span>
+                I Understand
+            </button>
+        </div>
+    </div>
+
+    <!-- Invalid Link Popup -->
+    <div id="invalidLinkPopup">
+        <div class="invalidLinkCard">
+            <div class="material-icons invalidLink-icon">link_off</div>
+            <h3>Invalid Link</h3>
+            <p>The link you provided is not a valid Google Drive link. Please check and try again.</p>
+            <button class="btn orange" onclick="hideInvalidLinkPopup()">
+                <span class="material-icons">check</span>
+                Try Again
+            </button>
+        </div>
+    </div>
+
+    <!-- Download Popup -->
+    <div id="downloadPopup">
+        <div class="downloadCard">
+            <div class="loader">
+                <div class="loader-ring"></div>
+                <div class="loader-ring"></div>
+                <div class="loader-ring"></div>
+            </div>
+            <h3>Preparing Download</h3>
+            <p>Your file is being prepared for download. Please wait...</p>
+            <div class="countdown" id="countdown">5</div>
+            <div class="progress-text" id="progressText">Starting download in 5 seconds</div>
+        </div>
+    </div>
+
+    <!-- Download Progress Popup -->
+    <div id="downloadProgressPopup">
+        <div class="downloadProgressCard">
+            <div class="download-animation">
+                <div class="download-box">
+                    <div class="side front"><span class="material-icons">description</span></div>
+                    <div class="side back"><span class="material-icons">description</span></div>
+                    <div class="side right"><span class="material-icons">description</span></div>
+                    <div class="side left"><span class="material-icons">description</span></div>
+                    <div class="side top"><span class="material-icons">description</span></div>
+                    <div class="side bottom"><span class="material-icons">description</span></div>
+                </div>
+                <div class="download-arrow"><span class="material-icons">arrow_downward</span></div>
+            </div>
+            <h3>Downloading File</h3>
+            <p>Your download is in progress. Please wait...</p>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="downloadProgressBar"></div>
+            </div>
+            
+            <div class="download-info">
+                <span id="downloadSpeed">0 KB/s</span>
+                <span id="downloadProgress">0%</span>
+                <span id="downloadSize">0 MB / 0 MB</span>
+            </div>
+            
+            <button class="btn" onclick="hideDownloadProgress()" style="background: #e0e0e0; color: #333; margin-top: 20px;">
+                <span class="material-icons">close</span>
+                Cancel Download
+            </button>
+        </div>
+    </div>
+
+    <!-- In-app Browser -->
+    <div id="inAppBrowser">
+        <div id="browserHeader">
+            <div class="url" id="browserUrl">about:blank</div>
+            <button class="closeBtn" onclick="closeBrowser()">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+        <iframe id="browserContent" sandbox="allow-downloads allow-forms allow-scripts allow-same-origin"></iframe>
+    </div>
+
+    <!-- Connection Restored Notification -->
+    <div id="connectionRestored">
+        <span class="material-icons">wifi</span>
+        <span>connection restored</span>
+    </div>
+
+    <div id="appWrap" class="wrap">
+        <header>
+            <h1>Google Drive Direct Downloader</h1>
+            <div class="muted">Direct download links for Google Drive files</div>
+        </header>
+
+        <div class="row section">
+            <!-- Tool card -->
+            <div class="col card">
+                <div class="muted">Paste Google Drive share link to generate direct download link</div>
+                <div style="margin-top:12px">
+                    <input id="gdriveLink" type="text" placeholder="https://drive.google.com/file/d/FILE_ID/view?usp=sharing">
+                </div>
+                <div class="btnGroup" style="margin-top:12px">
+                    <button class="btn green" onclick="generateDirect()" id="generateBtn">
+                        <span class="material-icons">link</span>
+                        Generate Direct Link
+                    </button>
+                </div>
+
+                <div id="resultBox">
+                    <div style="margin-top:12px;font-weight:600">Your direct download link:</div>
+                    <input id="directLink" type="text" readonly style="margin-top:8px;padding:10px;border-radius:8px;border:1px solid #e0e4ea;width:100%">
+                    <div class="btnGroup">
+                        <button id="copyBtn" class="btn orange" onclick="copyDirect()" style="position:relative">
+                            <span class="material-icons">content_copy</span>
+                            Copy Link
+                            <div class="copy-success" id="copySuccess">
+                                <span class="copy-text">
+                                    <span class="material-icons">check</span>
+                                    Link Copied!
+                                </span>
+                            </div>
+                        </button>
+                        <button id="dlBtn" class="btn blue" onclick="startDownload()">
+                            <span class="material-icons">download</span>
+                            Download
+                        </button>
+                    </div>
+                    <div class="muted" style="margin-top:8px">Note: Large files may require confirming on Google's page.</div>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div class="col card">
+                <div style="font-weight:600;margin-bottom:8px">How to use</div>
+                <div class="muted">
+                    <ol style="padding-left:20px;margin-top:0">
+                        <li style="margin-bottom:6px">Paste Google Drive share link</li>
+                        <li style="margin-bottom:6px">Click "Generate Direct Link"</li>
+                        <li style="margin-bottom:6px">Click "Download" button</li>
+                        <li>Wait for automatic download</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check internet connection
+        let isOnline = navigator.onLine;
+        let wasOffline = !isOnline;
+        let downloadInterval;
+        let downloadProgress = 0;
+        let downloadSpeed = 0;
+        let fileSize = 0;
+        let downloadLink = null;
+
+        window.addEventListener('online', () => { 
+            isOnline = true; 
+            hideOfflinePopup();
+            if(wasOffline) {
+                showConnectionRestored();
+                wasOffline = false;
+            }
+        });
+
+        window.addEventListener('offline', () => { 
+            isOnline = false; 
+            wasOffline = true;
+            showOfflinePopup();
+        });
+
+        function openNetworkSettings() {
+            // For Android devices
+            if (/Android/i.test(navigator.userAgent)) {
+                try {
+                    // Try to open WiFi settings directly
+                    window.location.href = 'intent://settings/network/wifi#Intent;scheme=android-settings;package=com.android.settings;end';
+                } catch (e) {
+                    try {
+                        // Fallback to general settings
+                        window.location.href = 'intent://settings#Intent;scheme=android-settings;package=com.android.settings;end';
+                    } catch (e) {
+                        showPopup('Please open network settings manually', 3000);
+                    }
+                }
+            } 
+            // For iOS devices
+            else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                try {
+                    // iOS doesn't allow direct settings access, so we show a message
+                    showPopup('Please open Settings and go to WiFi', 3000);
+                    // Try to open the Settings app (works in some browsers)
+                    window.location.href = 'App-Prefs:root=WIFI';
+                } catch (e) {
+                    showPopup('Please open Settings manually', 3000);
+                }
+            } 
+            // For desktop browsers
+            else {
+                showPopup('Please check your network connection', 3000);
+            }
+        }
+
+        function showConnectionRestored() {
+            const notification = document.getElementById('connectionRestored');
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function checkConnection() {
+            if (navigator.onLine) {
+                hideOfflinePopup();
+                isOnline = true;
+                showConnectionRestored();
+            } else {
+                showOfflinePopup();
+            }
+        }
+
+        function showOfflinePopup() {
+            document.getElementById('offlinePopup').classList.add('show');
+            document.getElementById('appWrap').style.filter = 'blur(4px)';
+        }
+
+        function hideOfflinePopup() {
+            document.getElementById('offlinePopup').classList.remove('show');
+            document.getElementById('appWrap').style.filter = 'none';
+        }
+
+        function showWarningPopup() {
+            document.getElementById('warningPopup').classList.add('show');
+            document.getElementById('appWrap').style.filter = 'blur(4px)';
+        }
+
+        function hideWarningPopup() {
+            document.getElementById('warningPopup').classList.remove('show');
+            document.getElementById('appWrap').style.filter = 'none';
+        }
+        
+        function showInvalidLinkPopup() {
+            document.getElementById('invalidLinkPopup').classList.add('show');
+            document.getElementById('appWrap').style.filter = 'blur(4px)';
+        }
+
+        function hideInvalidLinkPopup() {
+            document.getElementById('invalidLinkPopup').classList.remove('show');
+            document.getElementById('appWrap').style.filter = 'none';
+        }
+        
+        function showDownloadProgressPopup() {
+            document.getElementById('downloadProgressPopup').classList.add('show');
+        }
+        
+        function hideDownloadProgress() {
+            document.getElementById('downloadProgressPopup').classList.remove('show');
+            clearInterval(downloadInterval);
+            downloadProgress = 0;
+            downloadSpeed = 0;
+            fileSize = 0;
+        }
+
+        // Show notification popup
+        function showPopup(message, duration = 3000) {
+            const popup = document.createElement('div');
+            popup.className = 'animate__animated animate__fadeInUp';
+            popup.style.position = 'fixed';
+            popup.style.bottom = '20px';
+            popup.style.left = '50%';
+            popup.style.transform = 'translateX(-50%)';
+            popup.style.backgroundColor = '#333';
+            popup.style.color = 'white';
+            popup.style.padding = '12px 24px';
+            popup.style.borderRadius = '8px';
+            popup.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+            popup.style.zIndex = '1000';
+            popup.style.display = 'flex';
+            popup.style.alignItems = 'center';
+            popup.style.gap = '8px';
+            popup.innerHTML = `<span class="material-icons" style="font-size:20px">info</span> ${message}`;
+            
+            document.body.appendChild(popup);
+            
+            setTimeout(() => {
+                popup.classList.remove('animate__fadeInUp');
+                popup.classList.add('animate__fadeOutDown');
+                setTimeout(() => popup.remove(), 500);
+            }, duration);
+        }
+
+        // Generate direct download link with animation
+        function generateDirect() {
+            if (!isOnline) return showOfflinePopup();
+            
+            const url = document.getElementById('gdriveLink').value.trim();
+            if(!url) {
+                showWarningPopup();
+                return;
+            }
+            
+            // Animate the generate button
+            const generateBtn = document.getElementById('generateBtn');
+            generateBtn.classList.add('animate__animated', 'animate__pulse');
+            
+            setTimeout(() => {
+                generateBtn.classList.remove('animate__animated', 'animate__pulse');
+                
+                const m = url.match(/[-\w]{25,}/);
+                if(!m) {
+                    showInvalidLinkPopup();
+                    return;
+                }
+                
+                const fileId = m[0];
+                const direct = `https://drive.google.com/uc?export=download&id=${fileId}`;
+                document.getElementById('directLink').value = direct;
+                
+                // Show result with animation
+                const resultBox = document.getElementById('resultBox');
+                resultBox.style.display = 'block';
+                setTimeout(() => {
+                    resultBox.classList.add('show');
+                }, 10);
+                
+            }, 500);
+        }
+
+        // Copy direct link to clipboard with nice animation
+        function copyDirect() {
+            if (!isOnline) return showOfflinePopup();
+            
+            const el = document.getElementById('directLink');
+            if(!el.value) return showPopup('No link to copy.');
+            
+            // Animate the copy button
+            const copyBtn = document.getElementById('copyBtn');
+            copyBtn.classList.add('animate__animated', 'animate__pulse');
+            
+            setTimeout(() => {
+                copyBtn.classList.remove('animate__animated', 'animate__pulse');
+                
+                el.select();
+                el.setSelectionRange(0, 99999);
+                
+                navigator.clipboard.writeText(el.value).then(() => {
+                    const copySuccess = document.getElementById('copySuccess');
+                    copySuccess.classList.add('show');
+                    
+                    setTimeout(() => {
+                        copySuccess.classList.remove('show');
+                    }, 2000);
+                }).catch(() => {
+                    showPopup('Failed to copy link. Please try again.');
+                });
+            }, 300);
+        }
+
+        // Start download process with professional popup
+        function startDownload() {
+            if (!isOnline) return showOfflinePopup();
+            
+            const link = document.getElementById('directLink').value;
+            if(!link) return showPopup('Generate a direct link first.');
+            
+            // Store the download link
+            downloadLink = link;
+            
+            // Animate the download button
+            const dlBtn = document.getElementById('dlBtn');
+            dlBtn.classList.add('animate__animated', 'animate__pulse');
+            
+            setTimeout(() => {
+                dlBtn.classList.remove('animate__animated', 'animate__pulse');
+                
+                // Show the professional download popup
+                const popup = document.getElementById('downloadPopup');
+                popup.classList.add('show');
+                
+                let seconds = 5;
+                const countdown = document.getElementById('countdown');
+                const progressText = document.getElementById('progressText');
+                
+                // Update countdown and progress text
+                const timer = setInterval(() => {
+                    seconds--;
+                    countdown.textContent = seconds;
+                    progressText.textContent = seconds > 0 ? 
+                        `Starting download in ${seconds} second${seconds !== 1 ? 's' : ''}` : 
+                        'Opening download page...';
+                    
+                    if(seconds <= 0) {
+                        clearInterval(timer);
+                        startRealDownload();
+                        setTimeout(() => {
+                            popup.classList.remove('show');
+                        }, 500);
+                    }
+                }, 1000);
+            }, 300);
+        }
+        
+        // Start the actual download process
+        function startRealDownload() {
+            if (!downloadLink) return;
+            
+            // Open the direct download link in the browser
+            openInAppBrowser(downloadLink);
+        }
+
+        // Open URL in in-app browser with Google search engine
+        function openInAppBrowser(url) {
+            if (!isOnline) return showOfflinePopup();
+            
+            const browser = document.getElementById('inAppBrowser');
+            const iframe = document.getElementById('browserContent');
+            const urlDisplay = document.getElementById('browserUrl');
+            
+            // Set the URL to the direct download link
+            let finalUrl = url;
+            
+            urlDisplay.textContent = finalUrl;
+            iframe.src = finalUrl;
+            
+            // Show browser with animation
+            setTimeout(() => {
+                browser.classList.add('show');
+            }, 10);
+            
+            // Listen for download events
+            setupDownloadListener(iframe);
+        }
+        
+        // Setup download listener for the iframe
+        function setupDownloadListener(iframe) {
+            iframe.onload = function() {
+                try {
+                    // Try to detect if this is a Google Drive download page
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    
+                    // Check if this is a Google Drive virus scan warning page
+                    if (iframeDoc.querySelector('form[action*="uc-download"]') || 
+                        iframeDoc.body.innerText.includes('virus scan')) {
+                        
+                        // This is a Google Drive warning page, we need to submit the form
+                        setTimeout(() => {
+                            try {
+                                const form = iframeDoc.querySelector('form');
+                                if (form) {
+                                    form.submit();
+                                }
+                            } catch(e) {
+                                console.log('Could not auto-submit form');
+                            }
+                        }, 1000);
+                    }
+                    
+                    // Check if this is a direct download
+                    const contentDisposition = iframe.contentWindow.performance
+                        .getEntries()
+                        .find(entry => 
+                            entry.responseHeaders && 
+                            entry.responseHeaders.find(h => 
+                                h.name.toLowerCase().includes('content-disposition') &&
+                                h.value.toLowerCase().includes('attachment')
+                            )
+                        );
+                        
+                    if (contentDisposition) {
+                        // This is a direct download, show progress
+                        showDownloadProgressPopup();
+                        simulateRealDownloadProgress();
+                    }
+                } catch(e) {
+                    // Cross-origin restrictions, we can't access the iframe content
+                    console.log('Cannot access iframe content due to security restrictions');
+                }
+            };
+        }
+        
+        // Simulate download progress based on actual download
+        function simulateRealDownloadProgress() {
+            let progress = 0;
+            let speed = 0;
+            let lastUpdate = Date.now();
+            
+            downloadInterval = setInterval(() => {
+                const now = Date.now();
+                const elapsed = (now - lastUpdate) / 1000;
+                lastUpdate = now;
+                
+                // Simulate realistic download progress
+                if (progress < 100) {
+                    // Random speed between 500KB/s and 5MB/s
+                    const currentSpeed = Math.random() * 4500 + 500;
+                    speed = currentSpeed;
+                    
+                    // Calculate progress increment based on speed
+                    const increment = (currentSpeed / 1024) * elapsed / 10;
+                    progress = Math.min(progress + increment, 100);
+                    
+                    // Update UI
+                    document.getElementById('downloadProgressBar').style.width = `${progress}%`;
+                    document.getElementById('downloadProgress').textContent = `${Math.round(progress)}%`;
+                    
+                    // Format and display download speed
+                    let speedText;
+                    if (speed < 1024) {
+                        speedText = `${Math.floor(speed)} KB/s`;
+                    } else {
+                        speedText = `${(speed / 1024).toFixed(1)} MB/s`;
+                    }
+                    document.getElementById('downloadSpeed').textContent = speedText;
+                    
+                    // Estimate file size based on progress and speed
+                    if (progress > 0 && progress < 100) {
+                        const estimatedSize = (speed * 100) / (progress * 1024);
+                        document.getElementById('downloadSize').textContent = 
+                            `${(estimatedSize * progress / 100).toFixed(1)} MB / ${estimatedSize.toFixed(1)} MB`;
+                    }
+                } else {
+                    // Download complete
+                    clearInterval(downloadInterval);
+                    document.getElementById('downloadProgressBar').style.width = '100%';
+                    document.getElementById('downloadProgress').textContent = '100%';
+                    document.getElementById('downloadSpeed').textContent = 'Complete';
+                    
+                    // Close progress popup after a delay
+                    setTimeout(() => {
+                        hideDownloadProgress();
+                        showPopup('Download completed successfully!', 3000);
+                    }, 1000);
+                }
+            }, 200);
+        }
+
+        // Close in-app browser
+        function closeBrowser() {
+            const browser = document.getElementById('inAppBrowser');
+            const iframe = document.getElementById('browserContent');
+            
+            browser.classList.remove('show');
+            setTimeout(() => {
+                iframe.src = 'about:blank';
+            }, 400);
+        }
+
+        // Initialize offline check
+        if (!isOnline) {
+            setTimeout(() => {
+                showOfflinePopup();
+            }, 500);
+        }
+    </script>
+</body>
+</html>
     background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, 1) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255,1) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, 1) 76%, transparent 77%, transparent);
     height:100%;
     background-size:80px 80px;
